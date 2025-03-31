@@ -11,8 +11,7 @@ class Settings(BaseSettings):
 
     # OpenAI Configuration
     openai_api_key: str = os.getenv("OPENAI_API_KEY", "")
-    gpt_model: str = "gpt-4"  # Updated to use GPT-4 for better mental health analysis
-    max_tokens: int = 2000  # Increased for longer reports
+    gpt_model: str = "gpt-4o"  # Updated to use GPT-4o for better mental health analysis
     temperature: float = 0.3  # Lower temperature for more consistent reports
 
     # WhatsApp Configuration
@@ -26,8 +25,16 @@ class Settings(BaseSettings):
     host: str = "0.0.0.0"
 
     # Audio Processing Configuration
-    max_audio_duration: int = int(os.getenv("MAX_AUDIO_DURATION", "3000"))  # 50 minutes in seconds
-    supported_audio_formats: list = ["audio/mpeg", "audio/wav", "audio/ogg", "audio/x-wav", "audio/x-mp3"]
+    max_audio_duration: int = int(
+        os.getenv("MAX_AUDIO_DURATION", "3000")
+    )  # 50 minutes in seconds
+    supported_audio_formats: list = [
+        "audio/mpeg",
+        "audio/wav",
+        "audio/ogg",
+        "audio/x-wav",
+        "audio/x-mp3",
+    ]
     speech_recognition_energy_threshold: int = 4000
     speech_recognition_dynamic_energy_threshold: bool = True
     speech_recognition_pause_threshold: float = 0.8

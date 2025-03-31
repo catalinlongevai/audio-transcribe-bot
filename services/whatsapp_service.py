@@ -42,7 +42,9 @@ class WhatsAppService:
 
         # Format the phone number
         formatted_number = self.format_phone_number(to)
-        logger.info(f"Attempting to send message to formatted number: {formatted_number}")
+        logger.info(
+            f"Attempting to send message to formatted number: {formatted_number}"
+        )
 
         data = {
             "messaging_product": "whatsapp",
@@ -55,7 +57,7 @@ class WhatsAppService:
             logger.info(f"Sending WhatsApp message to {formatted_number}")
             logger.info(f"Request URL: {self.api_url}")
             logger.info(f"Request data: {json.dumps(data, indent=2)}")
-            
+
             response = requests.post(self.api_url, headers=headers, json=data)
             logger.info(f"Response status code: {response.status_code}")
             logger.info(f"Response body: {response.text}")

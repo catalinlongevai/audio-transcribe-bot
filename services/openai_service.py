@@ -1,11 +1,11 @@
 import logging
 from typing import Optional
-from config import settings
 from openai import OpenAI
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
 
 class OpenAIService:
     """Service for handling OpenAI API interactions"""
@@ -19,7 +19,7 @@ class OpenAIService:
         """Generate a structured report from the transcript"""
         try:
             logger.info("Generating report using OpenAI")
-            
+
             # Create the prompt
             prompt = f"""
             Please analyze this mental health conversation transcript and generate a structured report.
@@ -35,23 +35,25 @@ class OpenAIService:
             
             Format the report in a clear, professional manner suitable for healthcare providers.
             """
-            
+
             # Generate the report using OpenAI
             response = self.client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-4o",
                 messages=[
-                    {"role": "system", "content": "You are a professional mental health analyst. Generate clear, structured reports from conversation transcripts."},
-                    {"role": "user", "content": prompt}
+                    {
+                        "role": "system",
+                        "content": "You are a professional mental health analyst. Generate clear, structured reports from conversation transcripts.",
+                    },
+                    {"role": "user", "content": prompt},
                 ],
-                temperature=0.7,
-                max_tokens=1000
+                temperature=0.3,
             )
-            
+
             # Extract the report from the response
             report = response.choices[0].message.content.strip()
             logger.info("Report generated successfully")
             return report
-            
+
         except Exception as e:
             logger.error(f"Error generating report with OpenAI: {str(e)}")
             return None
